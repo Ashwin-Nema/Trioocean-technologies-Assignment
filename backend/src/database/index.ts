@@ -2,7 +2,7 @@ import {config} from 'dotenv'
 import { Client } from 'pg'
 
 config()
-
+// Main postgress client
 const {POSTGRESS_USER, POSTGRESS_HOST, POSTGRESS_DATABASE, POSTGRESS_PASSWORD, POSTGRESS_PORT} = process.env
 
 const client = new Client({
