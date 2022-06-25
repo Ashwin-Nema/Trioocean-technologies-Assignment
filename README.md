@@ -2,7 +2,7 @@
 A simple to-do list using angular with NodeJs backend and PostgreSQL
 
 Instructions:<br/><br/>
-Ensure that you are in the folder containing this readme.md file
+Ensure that you are in the folder containing this readme.md file and also your internet connection is on while loading this assignment because I have used bootstrap CDN that requires internet connection to load.
 <br/><br/>
 1. Open two separate terminals and go to the backend folder using both terminals </br>
 
