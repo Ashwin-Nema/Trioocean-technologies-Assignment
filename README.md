@@ -51,17 +51,17 @@ npm i
 
 and after node_modules are installed start the server with this command </br>
 ```
-ng serve
+npm start
 ```
 
 Now our server is running
 
 Routes in the frontend - 
 
-/ - Main Dashboard, Component - DashboardComponent </br>
-task/:id - Accessing task by id, Component - TaskdetailsComponent </br>
+/ - Main Dashboard, Component - Dashboard </br>
+task/:id - Accessing task by id, Component - AddTask </br>
 
-addtodo- Adding new task, Component - AddToDoComponent </br>
+addtodo- Adding new task, Component - TaskDetails </br>
 
 Front End:</br>
 Initially to do list is empty, new items can be added by clicking on Add New Task. Click there and add new task. Add all the necessary details and then click on Go To Dashboard. Now we have title and and a delete icon on the right end. Clicking on title will redirect towards the details of the task and clicking on the icon will delete the item. 

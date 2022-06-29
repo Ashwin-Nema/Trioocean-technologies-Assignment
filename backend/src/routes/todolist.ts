@@ -60,9 +60,11 @@ ListRouter.post("/", async (req, res) => {
         }
 
         await client.query(queryForAddingNewData)
-        res.json({code:200, message:"data added successfully"})
+        res.json({code:200, message:"Data added successfully"})
 
     } catch(error) {
+        console.log(req.body)
+        console.log(error)
         res.status(404).send("Sorry something went wrong")
     }
 })

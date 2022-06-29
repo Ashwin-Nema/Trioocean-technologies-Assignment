@@ -8,10 +8,9 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(
     cors({
-        origin:  process.env.PORT || 'http://localhost:4200' 
+        origin:  process.env.PORT || 'http://localhost:3000' 
     })
 )
-
 
 // Query for creating our table for storing to do list data
 
@@ -35,7 +34,7 @@ app.use(
 
 // ListRouter has all the CRUD Operations for the list
 app.use("/list", ListRouter)
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log("Server started")
     client.connect()
 })

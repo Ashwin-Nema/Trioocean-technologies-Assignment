@@ -1,0 +1,34 @@
+.hover {
+  cursor: pointer;
+}
+
+.modalwithoutcolor {
+  background-color: transparent;
+  border: none;
+}
+
+.descriptionTextArea:focus { 
+  outline: none !important;
+  border-color: #0d6efd;
+  border: 0.1rem solid #0d6efd;
+}
+
+.descriptionTextAreaError:focus { 
+  outline: none !important;
+  border-color: red;
+  border: 0.1rem solid red;
+}
+
+.smalltext {
+  font-size: small;
+}
+
+.unSelectTaskDate {
+  position: absolute;
+  bottom: -1.5rem !important;
+}
+
+.dateError {
+  position: absolute;
+  bottom: -3rem !important;
+}
