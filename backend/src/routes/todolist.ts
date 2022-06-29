@@ -9,7 +9,7 @@ ListRouter.get("/", async (req, res) => {
     try {
         const { limit, offset } = req.query
         const queryForAddingNewData = {
-            text: `SELECT * FROM todolist LIMIT $1 OFFSET $2`,
+            text: `SELECT id, title FROM todolist LIMIT $1 OFFSET $2`,
             values: [limit, offset]
         }
 
@@ -63,8 +63,6 @@ ListRouter.post("/", async (req, res) => {
         res.json({code:200, message:"Data added successfully"})
 
     } catch(error) {
-        console.log(req.body)
-        console.log(error)
         res.status(404).send("Sorry something went wrong")
     }
 })

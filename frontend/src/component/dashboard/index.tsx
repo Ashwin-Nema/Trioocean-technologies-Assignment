@@ -3,21 +3,45 @@ import { useState, useEffect } from 'react'
 import { BASEURL } from '../../config'
 import { useNavigate } from 'react-router-dom'
 import { AlertModal } from '../modal'
-import {openModalWithVariantAndMessage} from '../../utility'
+import { openModalWithVariantAndMessage } from '../../utility'
+import TablePagination from '@mui/material/TablePagination';
+import React from 'react'
+
+interface DashboardListData {
+    id: Number,
+    title: string
+}
 
 export const Dashboard = () => {
-    const [listData, setlistData] = useState([])
-    const [count, setCount] = useState(0)
-    const [modalVariant, setModalVariant] = useState("success")
-    const [modalMessage, setModalMessage] = useState("")
-    const [modal, showModal] = useState(false)
+    const [listData, setlistData] = useState<DashboardListData[]>([])
+    const [count, setCount] = useState<number>(0)
+    const [modalVariant, setModalVariant] = useState<string>("success")
+    const [modalMessage, setModalMessage] = useState<string>("")
+    const [modal, showModal] = useState<boolean>(false)
 
     const fixedModalParameters = [showModal, setModalMessage, setModalVariant]
     const navigate = useNavigate();
-  
 
-    const getListData = () => {
-        fetch(`${BASEURL}`).then(res => res.json()).then((res) => {
+    const [page, setPage] = useState<number>(0);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, page: number) => {
+        setPage(page);
+        getListData(undefined, page)
+    };
+
+    const handleChangeRowsPerPage = (event: any) => {
+        const limit = parseInt(event.target.value, 10)
+        setRowsPerPage(limit);
+        setPage(0);
+        getListData(limit, 0)
+    };
+
+    const getListData = (limit?:number, offset?:number) => {
+        const queryLimit = typeof limit == "number" ? limit :rowsPerPage
+        const queryOffset = (typeof offset == "number" ? offset  : page) * queryLimit
+
+        fetch(`${BASEURL}?limit=${rowsPerPage}&offset=${queryOffset}`).then(res => res.json()).then((res) => {
             const { count, data } = res
             setCount(Number(count))
             setlistData(data)
@@ -34,7 +58,7 @@ export const Dashboard = () => {
                 getListData()
             }
         }).catch(() => {
-            // openModalWithVariantAndMessage("Sorry something went wrong!", "danger", fixedModalParameters)
+            openModalWithVariantAndMessage("Sorry something went wrong!", "danger", fixedModalParameters)
         })
     }
 
@@ -82,6 +106,20 @@ export const Dashboard = () => {
                 {
                     count === 0 && <div className="d-flex justify-content-center mt-5 lead">
                         You have not added any task. Please add task
+                    </div>
+                }
+
+                {
+                    count > 0 &&
+                    <div className='dashboardPaginationTable'>
+                        <TablePagination
+                            component="div"
+                            count={count}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            rowsPerPage={rowsPerPage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
                     </div>
                 }
 
